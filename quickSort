@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int partition(int a[], int p, int r){
+	
+	int x=r;
+	int i=p-1;
+	int j=p;
+	int temp;
+	
+	if (p<r){
+		while (j<r){
+			if (a[j]<a[x]){
+				temp=a[j];
+				a[j]=a[i+1];
+				a[i+1]=temp;
+				i++;
+			}
+			j++;
+		}
+		temp=a[x];
+		a[x]=a[i+1];
+		a[i+1]=temp;
+	}
+	x=i+1;
+	
+	return x;
+}
+
+void quickSort(int a[], int p, int r){
+	if (p<r){
+		int q=partition(a, p, r);
+		quickSort(a, p, q-1);
+		quickSort(a, q+1, r);	
+	}
+}
+
+
+int main(int argc, char *argv[]) {
+
+	int k, n; 
+
+	scanf("%d", &n);
+
+	int list[n];
+
+	for (k=0;k<n;k++){
+		list[k]=rand()%5000;
+		printf("%d ", list[k]);
+	}
+
+	printf("\n");
+
+	quickSort(list, 0, n-1);
+
+
+
+	for (k=0;k<n;k++)
+
+		printf("%d ", list[k]);
+
+
+	return 0;
+
+
+
+}
+
+
+
+
+
